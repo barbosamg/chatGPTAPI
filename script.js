@@ -1,4 +1,4 @@
-const OPEN_API_KEY = "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";
+const OPEN_API_KEY = "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";
 
 let txtPergunta = document.querySelector("#txtPergunta");
 let resposta = document.querySelector("#resposta");
