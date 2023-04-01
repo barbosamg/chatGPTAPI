@@ -1,7 +1,7 @@
 const OPEN_API_KEY = "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";
 
 let txtPergunta = document.querySelector("#txtPergunta");
-let result = document.querySelector("#resposta");
+let resposta = document.querySelector("#resposta");
 
 txtPergunta.addEventListener("keypress", (e) => {
   if (txtPergunta.value && e.key === "Enter") {
@@ -28,17 +28,17 @@ function EnviarPergunta() {
   })
     .then((response) => response.json())
     .then((json) => {
-      if (result.value) result.value += "\n";
+      if (resposta.value) resposta.value += "\n";
 
       if (json.error?.message) {
-        result.value += `Erro: ${json.error.message}`;
+        resposta.value += `Erro: ${json.error.message}`;
       } else if (json.choices?.[0].text) {
         let text = json.choices[0].text || "Sem resposta";
 
-        result.value += "Chat GPT: " + text;
+        resposta.value += "Chat GPT: " + text;
       }
 
-      result.scrollTop = result.scrollHeight;
+      resposta.scrollTop = resposta.scrollHeight;
     })
     .catch((error) => console.log("Erro: ", error))
     .finally(() => {
@@ -47,11 +47,11 @@ function EnviarPergunta() {
       txtPergunta.focus();
     });
 
-  if (result.value) result.value += "\n\n\n";
+  if (resposta.value) resposta.value += "\n\n\n";
 
-  result.value += `Eu: ${pergunta}`;
+  resposta.value += `Eu: ${pergunta}`;
   txtPergunta.value = "Carregando...";
   txtPergunta.disabled = true;
 
-  result.scrollTop = result.scrollHeight;
+  resposta.scrollTop = resposta.scrollHeight;
 }
